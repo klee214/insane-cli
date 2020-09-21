@@ -2,7 +2,7 @@
 
 ## Clone and change to working directory
 ```
-clone https://github.com/VietnameZe/insane-cli.git
+git clone https://github.com/VietnameZe/insane-cli.git
 cd insane-cli
 ```
 
