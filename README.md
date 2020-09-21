@@ -11,7 +11,6 @@ cd insane-cli
 ```
 npm i colors
 ```
-[Details](https://www.npmjs.com/package/colors)
 
 ## Run program
 ```
