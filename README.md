@@ -6,10 +6,11 @@ git clone https://github.com/VietnameZe/insane-cli.git
 cd insane-cli
 ```
 
-## Install dependency
+## Install required dependency
 ```
 npm install colors
 ```
+[Details](https://www.npmjs.com/package/colors)
 
 ## Run program
 ```
