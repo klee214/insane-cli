@@ -1,12 +1,8 @@
 # insane-cli
 
-## Clone
+## Clone and change to working directory
 ```
 clone https://github.com/VietnameZe/insane-cli.git
-```
-
-## Move to current folder
-```
 cd insane-cli
 ```
 
