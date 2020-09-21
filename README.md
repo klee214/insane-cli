@@ -7,9 +7,13 @@ cd insane-cli
 ```
 
 ## Required dependency 
-Install [colors:](https://www.npmjs.com/package/colors)
+Install [colors](https://www.npmjs.com/package/colors):
 ```
 npm i colors
+```
+Install [request](https://www.npmjs.com/package/request):
+```
+npm i request
 ```
 
 ## Run program
