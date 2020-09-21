@@ -23,8 +23,8 @@ node insane-cli
 // check insane-cli version
 node insane-cli --version  or  /v
 
-// check links which are extracted from file
-node insane-cli <file>
+// check links which are extracted from file 'test'
+node insane-cli test
 
 // // check links from URL
 node insane-cli -url https://www.google.com
