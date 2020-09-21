@@ -1,7 +1,3 @@
-/*
-Minh Huy Nguyen
-https://x7z.net
-* */
 #!/usr/bin/env node
 const fs = require('fs');
 // const fsPromises = require('fs').promises;
