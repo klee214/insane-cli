@@ -9,8 +9,7 @@ cd insane-cli
 ## Required dependency 
 Install [colors](https://www.npmjs.com/package/colors), [request](https://www.npmjs.com/package/request):
 ```
-npm i colors
-npm i request
+npm i --save colors request
 ```
 
 ## Run program
