@@ -30,4 +30,4 @@ insane-cli -url https://www.google.com
 
 ### To run globally
 You might need to use ```npm link``` in the current ```insane-cli``` directory. 
-Otherwise you can use syntax ```node insane-cli <file>``` to run. 
+Otherwise you can use syntax ```node insane-cli <args>``` to run. 
