@@ -20,8 +20,8 @@ insane-cli
 // check insane-cli version
 insane-cli --version  or  /v
 
-// check links which are extracted from file named 'test1' (or test2.html or any file)
-insane-cli test1 
+// check links which are extracted from file named 'sample.txt'
+insane-cli sample.txt 
 
 // // check links of body's webpage by URL
 insane-cli -url https://www.google.com
