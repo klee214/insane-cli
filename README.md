@@ -12,8 +12,9 @@ Install [colors](https://www.npmjs.com/package/colors), [request](https://www.np
 npm i --save colors request
 ```
 ## To run globally
-You might need to use ```npm link``` in ```insane-cli``` directory. 
+You need to use ```npm link``` in ```insane-cli``` directory to run CLI in form: ```insane-cli <args-see-below>```. 
 Otherwise you can use syntax: ```node insane-cli <args-see-below>``` to run. 
+In rare case, you might need executive permission for ```insane-cli.js```. If problem occurs, use ```chmod +x insane-cli.js```
 
 ## Run program
 ```
