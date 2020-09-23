@@ -11,6 +11,9 @@ Install [colors](https://www.npmjs.com/package/colors), [request](https://www.np
 ```
 npm i --save colors request
 ```
+## To run globally
+You might need to use ```npm link``` in ```insane-cli``` directory. 
+Otherwise you can use syntax: ```node insane-cli <args-see-below>``` to run. 
 
 ## Run program
 ```
@@ -28,6 +31,4 @@ insane-cli -url https://www.google.com
 
 ```
 
-### To run globally
-You might need to use ```npm link``` in the current ```insane-cli``` directory. 
-Otherwise you can use syntax ```node insane-cli <args>``` to run. 
+
