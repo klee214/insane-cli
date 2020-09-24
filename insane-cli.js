@@ -88,7 +88,7 @@ function printURLStatus(urls) {
 
     for (let i = urls.length; i--;) {
         try {
-            request(urls[i], function (error, response, body) {
+            request(urls[i],{method: 'HEAD', timeout: 1800}, function (error, response, body) {
 
                 //console.error('error:', error);
                 let status = response && response.statusCode;
