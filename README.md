@@ -30,6 +30,9 @@ insane-cli sample.txt
 // // check links of body's webpage by URL
 insane-cli -url https://www.google.com
 
+// Search in wayback machine
+insane-cli -w https://finance.yahoo.com 2016
+
 ```
 
 
