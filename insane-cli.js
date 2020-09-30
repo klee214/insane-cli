@@ -8,6 +8,8 @@ const request = require('request')
 // patterns & splitter
 const PT1 = /\bhttps?::\/\/\S+/gi
 const PT2 = /\bhttps?:\/\/\S+/gi
+// wayback api
+const waybackApi="http://archive.org/wayback/available?";
 
 
 // let filename = process.argv[2]
@@ -27,6 +29,32 @@ if (argv3 != null) {
                 }
             });
 
+        } else if(argv3==='-w' || argv3 ==='/w'){
+            // This is for searching webpage in wayback machine
+            // usage syntax: insane-cli -w url yyyy-mm-dd-hh-ss
+            // The timestamp is optional, and if not provided, it will
+            // retrieve the lates archived version of the page
+            let timeStamp="";
+            if(process.argv[4]){
+                timeStamp= process.argv[4];
+            }
+            const url=`${waybackApi}url=${argv4}&timestamp=${timeStamp}`;
+            request(url,function(error, response, body){
+                const {archived_snapshots}=JSON.parse(body);
+                if(Object.keys(archived_snapshots).length===0 && archived_snapshots.constructor === Object){
+                    console.log("No archived record found");
+                }
+                else{
+                    const year = archived_snapshots.closest.timestamp.substring(0,4);
+                    const month = archived_snapshots.closest.timestamp.substring(4,6);
+                    const day = archived_snapshots.closest.timestamp.substring(6,8);
+                    const hour = archived_snapshots.closest.timestamp.substring(8,10);
+                    const min = archived_snapshots.closest.timestamp.substring(10,12);
+                    const sec= archived_snapshots.closest.timestamp.substring(12,14);
+                    console.log(`Archived URL: ${archived_snapshots.closest.url}`);
+                    console.log(`Archived Time: ${year}-${month}-${day} ${hour}-${min}-${sec}`);
+                }
+            });
         } else {
             console.log('Command not found!');
         }
