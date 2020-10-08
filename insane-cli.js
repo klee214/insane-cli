@@ -17,8 +17,8 @@ const waybackApi="http://archive.org/wayback/available?";
 let argv3 = process.argv[2]
 let argv4 = process.argv[3]
 
-if (argv3 != null) {
-    if(argv4 != null) { // for URL process
+if (!argv3) {
+    if(!argv4) { // for URL process
         if(argv3 === '-url' || argv3 === '/url') {
             request(argv4, function (error, response, body) {
                 if(response.statusCode === 200) { // only process url with statusCode 200
@@ -29,19 +29,19 @@ if (argv3 != null) {
                 }
             });
 
-        } else if(argv3==='-w' || argv3 ==='/w'){
+        } else if(argv3 === '-w' || argv3 === '/w'){
             // This is for searching webpage in wayback machine
             // usage syntax: insane-cli -w url yyyy-mm-dd-hh-ss
             // The timestamp is optional, and if not provided, it will
             // retrieve the lates archived version of the page
-            let timeStamp="";
+            let timeStamp = "";
             if(process.argv[4]){
                 timeStamp= process.argv[4];
             }
-            const url=`${waybackApi}url=${argv4}&timestamp=${timeStamp}`;
+            const url = `${waybackApi}url=${argv4}&timestamp=${timeStamp}`;
             request(url,function(error, response, body){
-                const {archived_snapshots}=JSON.parse(body);
-                if(Object.keys(archived_snapshots).length===0 && archived_snapshots.constructor === Object){
+                const {archived_snapshots} = JSON.parse(body);
+                if(Object.keys(archived_snapshots).length === 0 && archived_snapshots.constructor === Object){
                     console.log("No archived record found");
                 }
                 else{
