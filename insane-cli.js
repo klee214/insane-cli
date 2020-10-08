@@ -17,8 +17,8 @@ const waybackApi="http://archive.org/wayback/available?";
 let argv3 = process.argv[2]
 let argv4 = process.argv[3]
 
-if (!argv3) {
-    if(!argv4) { // for URL process
+if (argv3 != null) {
+    if(argv4 != null) { // for URL process
         if(argv3 === '-url' || argv3 === '/url') {
             request(argv4, function (error, response, body) {
                 if(response.statusCode === 200) { // only process url with statusCode 200
