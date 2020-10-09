@@ -83,6 +83,44 @@ if (argv3 != null) {
                 console.error(err);
             }
 
+        } else if(argv3 === '--all' || argv3 === '--good' || argv3 === '--bad') {
+            ///////////////
+
+            let filename = argv4;
+
+            try {
+                if(fs.existsSync(filename)) { // check if file exist
+                    (async () => {
+                        await fs.promises.readFile(filename)
+                            .then(function (data) {
+
+                                let finalURLs = getURLs(data)
+                                printURLStatusByFlag(finalURLs, argv3)
+
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            })
+                    })()
+                } else {
+                    console.log('File not found!');
+                }
+            } catch (err) {
+                console.error(err);
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -162,6 +200,51 @@ function printURLStatus(urls) {
                         console.log('[' + status + ']REDIRECT - ' + urls[i].blue)
                     } else {
                         console.log('UNKNOWN - ' + urls[i].grey)
+                    }
+                }
+            });
+        } catch (error) {
+            console.error('WTF - ' + urls[i].yellow)
+        }
+    }
+}
+
+function printURLStatusByFlag(urls, flag) {
+
+    for (let i = urls.length; i--;) {
+        try {
+            request(urls[i],{method: 'HEAD', timeout: 1800}, function (error, response, body) {
+
+                //console.error('error:', error);
+                let status = response && response.statusCode;
+                if (status !== null) {
+                    // if (status === 200) {
+                    //     console.log('[' + status + ']GOOD - ' + urls[i].green)
+                    // } else if (status === 400 || status === 404) {
+                    //     console.log('[' + status + ']BAD - ' + urls[i].red)
+                    // } else if (status === 301 || status === 307 || status === 308) {
+                    //     console.log('[' + status + ']REDIRECT - ' + urls[i].blue)
+                    // } else {
+                    //     console.log('UNKNOWN - ' + urls[i].grey)
+                    // }
+                    if(flag === '--good') {
+                        if (status === 200) {
+                                console.log('[' + status + ']GOOD - ' + urls[i].green)
+                        }
+                    } else if(flag === '--bad') {
+                        if (status === 400 || status === 404) {
+                                console.log('[' + status + ']BAD - ' + urls[i].red)
+                        }
+                    } else if(flag === '--all') {
+                        if (status === 200) {
+                            console.log('[' + status + ']GOOD - ' + urls[i].green)
+                        } else if (status === 400 || status === 404) {
+                            console.log('[' + status + ']BAD - ' + urls[i].red)
+                        } else if (status === 301 || status === 307 || status === 308) {
+                            console.log('[' + status + ']REDIRECT - ' + urls[i].blue)
+                        } else {
+                            console.log('UNKNOWN - ' + urls[i].grey)
+                        }
                     }
                 }
             });
