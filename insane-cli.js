@@ -3,7 +3,8 @@
 const fs = require('fs');
 
 const colors = require('colors')
-const request = require('request')
+const request = require('request');
+const { url } = require('inspector');
 
 
 // patterns & splitter
@@ -56,6 +57,37 @@ if (argv3 != null) {
                     console.log(`Archived Time: ${year}-${month}-${day} ${hour}-${min}-${sec}`);
                 }
             });
+        } else if(argv3 === '-j' || argv3 === '--json' || argv3 === '/j') {
+            // do something to print JSON from here
+
+            let filename = argv4;
+
+            try {
+                if(fs.existsSync(filename)) { // check if file exist
+                    (async () => {
+                        await fs.promises.readFile(filename)
+                            .then(function (data) {
+
+                                let finalURLs = getURLs(data)
+                                printURLStatusInJSON(finalURLs)
+
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            })
+                    })()
+                } else {
+                    console.log('File not found!');
+                }
+            } catch (err) {
+                console.error(err);
+            }
+
+
+
+
+
+
         } else {
             console.log('Command not found!');
         }
@@ -139,6 +171,42 @@ function printURLStatus(urls) {
     }
 }
 
+function printURLStatusInJSON(urls) {
+    
+    var res = [];
+
+    let str = "";
+    for (let i = urls.length; i--;) {
+        getObj(urls[i]).then((data) => {
+            console.log(JSON.parse(JSON.stringify(data)));
+        })
+    }
+
+    console.log(str);
+}
+
+function getObj(input) {
+    return new Promise( (resolve, reject) => {
+        try {
+            request(input,{method: 'HEAD', timeout: 1800}, function (error, response, body) {
+    
+                //console.error('error:', error);
+                let status = response && response.statusCode;
+                if (status !== null) {
+                    var obj = {
+                        url: input,
+                        statuscode: status
+                    };
+                    resolve(obj);
+                }
+            });
+        } catch (error) {
+            //console.error('WTF - ' + urls[i].yellow)
+        }
+    });
+}
+
+
 function showHelp() {
     console.log('HOW TO USE'.bgGreen)
     console.log('------------------------------------------------'.blue)
@@ -146,4 +214,5 @@ function showHelp() {
     console.log(' insane-cli [--version][/v]'.green + ' to check current version'.blue)
     console.log(' insane-cli [file-path]'.green + ' process a file'.blue)
     console.log(' insane-cli -url [full-url-link]'.green + ' process body\'s link'.blue)
+    console.log(' insane-cli -j [file-path]'.green + ' print results in JSON format'.blue)
 }
