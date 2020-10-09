@@ -112,20 +112,6 @@ if (argv3 != null) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         } else {
             console.log('Command not found!');
         }
