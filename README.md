@@ -27,6 +27,9 @@ insane-cli --version  or  /v
 // check links which are extracted from file named 'sample.txt'
 insane-cli sample.txt 
 
+// check links which are extracted from file named 'sample.txt' excluding URLs in ignore.txt
+insane-cli sample.txt  -i ignore.txt
+
 // // check links of body's webpage by URL
 insane-cli -url https://www.google.com
 
